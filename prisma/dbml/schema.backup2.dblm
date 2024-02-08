@@ -1,0 +1,123 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table City {
+  id Int [pk, increment]
+  name String [not null]
+  zipcode Int [unique, not null]
+}
+
+Table Contact {
+  id Int [pk, increment]
+  url String
+  phone String
+  email String
+  facebook String
+  twitter String
+}
+
+Table Event {
+  id Int [pk, increment]
+  cityId Int
+  contactId Int
+  url String
+  title String
+  lead_text String
+  description String
+  date_start DateTime
+  date_end DateTime
+  date_description String
+  occurrences String
+  cover_url String
+  cover_alt String
+  cover_credit String
+  tags Tag[] [not null]
+  address_name String
+  address_street String
+  latitude Float
+  longitude Float
+  pmr Boolean
+  blind Boolean
+  deaf Boolean
+  transport String
+  access_type AccessType
+  access_link String
+  access_link_text String
+  price_type PriceType
+  price_detail String
+  programs String
+  audience String
+  group Group
+}
+
+Table User {
+  id Int [pk, increment]
+  email String [unique, not null]
+  password String [not null]
+  name String
+}
+
+Enum Tag {
+  Concert
+  Enfants
+  Musique
+  Expo
+  Theatre
+  Conference
+  Loisirs
+  Peinture
+  Atelier
+  Litterature
+  Danse
+  Sport
+  ArtContemporain
+  SpectacleMusical
+  Cinema
+  Innovation
+  Balade
+  Nature
+  Histoire
+  Photo
+  Clubbing
+  BD
+  Cirque
+  Solidarite
+  Brocante
+  Humour
+  Salon
+  Sciences
+  LGBT
+  Sante
+  StreetArt
+  Gourmand
+  Jeux2024
+}
+
+Enum PriceType {
+  gratuit
+  payant
+  gratuitConditionnel
+}
+
+Enum Group {
+  Aucun
+  Agenda
+  CentresAnimations
+  NuitBlanche
+  Bibliotheques
+  ActivitesDJS
+  ParcsEtJardins
+  Associations
+  Musees
+}
+
+Enum AccessType {
+  obligatoire
+  conseillee
+  non
+}
+
+Ref: Event.cityId > City.id
+
+Ref: Event.contactId > Contact.id

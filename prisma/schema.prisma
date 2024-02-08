@@ -1,0 +1,19 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+generator dblm {
+    provider = "prisma-dbml-generator"
+}
+
+datasource db {
+    provider = "sqlite"
+    url      = "file:./sqlite.db"
+}
+
+model Score {
+    id       Int    @id @default(autoincrement())
+    nickname String
+    score    Int
+    position Int
+}

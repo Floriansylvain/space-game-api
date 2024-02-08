@@ -1,0 +1,170 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table City {
+  id Int [pk, increment]
+  name String [not null]
+  zipcode Int [not null]
+}
+
+Table ImageCover {
+  id String [pk]
+  filename String [not null]
+  width Int [not null]
+  height Int [not null]
+  format Format [not null]
+  etag String [not null]
+  mimetype MimeType [not null]
+  last_synchronized DateTime [not null]
+  color_summary String[] [not null]
+  thumbnail Boolean [not null]
+}
+
+Table LatLon {
+  id Int [pk, increment]
+  lon Float [not null]
+  lat Float [not null]
+}
+
+Table Contact {
+  id Int [pk, increment]
+  url String
+  phone String
+  mail String
+  facebook String
+  twitter String
+}
+
+Table Price {
+  id Int [pk, increment]
+  type PriceType [not null]
+  detail String
+}
+
+Table Access {
+  id Int [pk, increment]
+  type String [not null]
+  link String
+  link_text String
+}
+
+Table Event {
+  id Int [pk, increment]
+  latLonId Int [not null]
+  cityId Int [not null]
+  contactId Int
+  priceId Int
+  accessId Int
+  imageCoverId String [not null]
+  url String [unique, not null]
+  title String [not null]
+  lead_text String [not null]
+  description String [not null]
+  date_start DateTime [not null]
+  date_end DateTime [not null]
+  date_description String [not null]
+  occurrences String [not null]
+  cover_url String [not null]
+  cover_alt String
+  cover_credit String
+  tags Tag[] [not null]
+  address_name String [not null]
+  address_street String [not null]
+  pmr Boolean [not null]
+  blind Boolean [not null]
+  deaf Boolean [not null]
+  transport String
+  updated_at DateTime [not null]
+  programs String
+  address_url String
+  address_url_text String
+  address_text String
+  title_event String
+  audience String
+  childrens String
+  group Group [not null]
+}
+
+Enum Tag {
+  Concert
+  Enfants
+  Musique
+  Expo
+  Theatre
+  Conference
+  Loisirs
+  Peinture
+  Atelier
+  Litterature
+  Danse
+  Sport
+  ArtContemporain
+  SpectacleMusical
+  Cinema
+  Innovation
+  Balade
+  Nature
+  Histoire
+  Photo
+  Clubbing
+  BD
+  Cirque
+  Solidarite
+  Brocante
+  Humour
+  Salon
+  Sciences
+  LGBT
+  Sante
+  StreetArt
+  Gourmand
+  Jeux2024
+}
+
+Enum PriceType {
+  gratuit
+  payant
+  gratuitConditionnel
+}
+
+Enum Group {
+  Aucun
+  Agenda
+  CentresAnimations
+  NuitBlanche
+  Bibliotheques
+  ActivitesDJS
+  ParcsEtJardins
+  Associations
+  Musees
+}
+
+Enum Format {
+  PNG
+  JPEG
+}
+
+Enum MimeType {
+  image_jpeg
+  image_png
+}
+
+Table User {
+  id Int [pk, increment]
+  email String [unique, not null]
+  password String [not null]
+  name String
+}
+
+Ref: Event.cityId > City.id
+
+Ref: Event.latLonId > LatLon.id
+
+Ref: Event.contactId > Contact.id
+
+Ref: Event.priceId > Price.id
+
+Ref: Event.accessId > Access.id
+
+Ref: Event.imageCoverId > ImageCover.id
